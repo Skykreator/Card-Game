@@ -1,3 +1,43 @@
-[gd_scene format=3 uid="uid://131tcq3it7ic"]
+[gd_scene load_steps=5 format=3 uid="uid://131tcq3it7ic"]
 
-[node name="Card" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://mclnm2mg6nxx" path="res://Assets/Sprites/golira.PNG" id="1_pin7n"]
+[ext_resource type="Script" path="res://Scripts/card_interaction.cs" id="1_sllm0"]
+[ext_resource type="PackedScene" uid="uid://btk0x8l2wwrrc" path="res://Scenes/combat.tscn" id="3_myc6b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t6d31"]
+size = Vector2(170, 240)
+
+[node name="Card" type="Area2D" node_paths=PackedStringArray("sprite", "combatNode")]
+script = ExtResource("1_sllm0")
+sprite = NodePath("CollisionShape2D/UI elements/card art")
+combatNode = NodePath("combat")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_t6d31")
+
+[node name="UI elements" type="Node2D" parent="CollisionShape2D"]
+
+[node name="card art" type="Sprite2D" parent="CollisionShape2D/UI elements"]
+texture = ExtResource("1_pin7n")
+
+[node name="health" type="RichTextLabel" parent="CollisionShape2D/UI elements"]
+offset_left = 73.0
+offset_top = 119.0
+offset_right = 113.0
+offset_bottom = 159.0
+text = "8"
+autowrap_mode = 0
+
+[node name="attack" type="RichTextLabel" parent="CollisionShape2D/UI elements"]
+offset_left = -88.0
+offset_top = 119.0
+offset_right = -48.0
+offset_bottom = 159.0
+text = "8"
+autowrap_mode = 0
+
+[node name="combat" parent="." node_paths=PackedStringArray("attackDisp", "healthDisp") instance=ExtResource("3_myc6b")]
+max_health = 5
+attack = 4
+attackDisp = NodePath("../CollisionShape2D/UI elements/attack")
+healthDisp = NodePath("../CollisionShape2D/UI elements/health")

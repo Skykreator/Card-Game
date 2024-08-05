@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://btk0x8l2wwrrc"]
+
+[ext_resource type="Script" path="res://Scripts/combat.cs" id="1_uvacl"]
+
+[node name="combat" type="Node"]
+script = ExtResource("1_uvacl")

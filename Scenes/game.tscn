@@ -1,3 +1,27 @@
-[gd_scene format=3 uid="uid://bkd3i4xu5qls6"]
+[gd_scene load_steps=4 format=3 uid="uid://bkd3i4xu5qls6"]
+
+[ext_resource type="PackedScene" uid="uid://131tcq3it7ic" path="res://Scenes/card.tscn" id="1_cecq2"]
+[ext_resource type="Script" path="res://Scripts/game_manager.cs" id="1_xgxvl"]
+[ext_resource type="PackedScene" uid="uid://dxobm0g3f71mg" path="res://Scenes/card_engine.tscn" id="2_yo501"]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_xgxvl")
+
+[node name="Card_Engine" parent="." instance=ExtResource("2_yo501")]
+
+[node name="Card" parent="Card_Engine" instance=ExtResource("1_cecq2")]
+position = Vector2(-293, 171)
+
+[node name="combat" parent="Card_Engine/Card" index="1" node_paths=PackedStringArray("engine")]
+engine = NodePath("../..")
+
+[node name="Card2" parent="Card_Engine" instance=ExtResource("1_cecq2")]
+position = Vector2(313, 172)
+
+[node name="combat" parent="Card_Engine/Card2" index="1" node_paths=PackedStringArray("engine")]
+engine = NodePath("../..")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[editable path="Card_Engine/Card"]
+[editable path="Card_Engine/Card2"]
